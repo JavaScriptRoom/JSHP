@@ -9,6 +9,7 @@ const app = express();
 app.get(/./, function handler(req, res) {
 	if (req.path === '/') path = '/index.js';
 	else path = req.path;
+	if(path.includes("..") || path.includes("~")) return res.status(503).end("Y U HAX >:( ")
 	fs.readFile(__dirname + path, function(err, data) {
 		if(err) {
 			if(process.env.NODE_ENV !== 'production') {
