@@ -9,8 +9,17 @@ const app = express();
 app.get(/./, function handler(req, res) {
 	if (req.path === '/') path = '/index.js';
 	else path = req.path;
-	Function('echo', fs.readFileSync(__dirname + path))(res.write.bind(res));
-	res.end();
+	fs.readFile(__dirname + path, function(err, data) {
+		if(err) {
+			if(process.env.NODE_ENV !== 'production') {
+				res.write(err.message + " " + err.stack);
+			}
+			res.status(500).end();
+			return; 
+		}
+		Function('echo', data)((...args) => res.write(...args));	
+		res.end();
+	});
 	var path;
 });
 
