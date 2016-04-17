@@ -1,7 +1,5 @@
 {
   "dependencies": {
-    "express": "^4.13.4",
-    "left-pad": "^1.0.2",
-    "is-thirteen": "^2.0.0"
+    "express": "^4.13.4"
   }
 }
