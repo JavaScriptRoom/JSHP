@@ -1,0 +1,17 @@
+#!/usr/bin/node
+
+"use strict";
+
+const fs = require('fs');
+const express = require('express');
+const app = express();
+
+app.get(/./, function handler(req, res) {
+	if (req.path === '/') path = '/index.js';
+	else path = req.path;
+	Function('echo', fs.readFileSync(__dirname + path))(res.write.bind(res));
+	res.end();
+	var path;
+});
+
+app.listen(8080);
